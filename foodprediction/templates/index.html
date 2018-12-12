@@ -1,27 +1,33 @@
+
+
+
 <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
 <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
 <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 
-<style>
-img.image_pic {
-    height: 146px;
-    width: 172px;
-    margin-left: 19px;
-}
+<style >
+  .profile_image {
+      width: 6em;
+      height: 6em;
+  }
+  .button_width{
+    width:100%;
+  }
 </style>
 <ons-splitter>
   <ons-splitter-side id="menu" side="left" width="220px" collapse swipeable>
     <ons-page>
+      <img src="" class="profile_image"/>
       <ons-list>
-        <img class="image_pic" src="" />
         <ons-list-item onclick="fn.load('home.html')" tappable>
           Home
         </ons-list-item>
         <ons-list-item onclick="fn.load('settings.html')" tappable>
-          Food
-        </ons-list-item>
-        <ons-list-item onclick="fn.load('food.html')" tappable>
           Settings
+        </ons-list-item>
+        <ons-list-item onclick="fn.load('about.html')" tappable>
+          About
         </ons-list-item>
       </ons-list>
     </ons-page>
@@ -41,9 +47,136 @@ img.image_pic {
         Main
       </div>
     </ons-toolbar>
-    <p style="text-align: center; opacity: 0.6; padding-top: 20px;">
-      Swipe right to open the menu!
-    </p>
+
+
+
+    <ons-card>
+      <div class="title">
+      Nutrients
+      </div>
+      <div class="content">
+        <canvas id="myChart"></canvas>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+        <script>
+          var ctx = document.getElementById('myChart').getContext('2d');
+          var chart = new Chart(ctx, {
+              // The type of chart we want to create
+              type: 'bar',
+
+              // The data for our dataset
+              data: {
+                  labels: ["carbohydrates", "proteins", "fats"],
+                  datasets: [{
+                      label: "Nutrients",
+                      backgroundColor: 'rgb(255, 99, 132)',
+                      borderColor: 'rgb(255, 99, 132)',
+                      data: [3, 10, 5],
+                  }]
+              },
+
+              // Configuration options go here
+              options: {}
+          });
+        </script>
+        <div>
+          <ons-button class="button_width">Show</ons-button>
+
+        </div>
+    <!--    <ons-list>
+          <ons-list-header>Bindings</ons-list-header>
+          <ons-list-item>Vue</ons-list-item>
+          <ons-list-item>Angular</ons-list-item>
+          <ons-list-item>React</ons-list-item>
+        </ons-list>-->
+      </div>
+    </ons-card>
+
+    <ons-card>
+      <div class="title">
+      Lipides
+      </div>
+      <div class="content">
+        <canvas id="myChart"></canvas>
+
+
+        <div>
+          <ons-button class="button_width">Show</ons-button>
+
+        </div>
+    <!--    <ons-list>
+          <ons-list-header>Bindings</ons-list-header>
+          <ons-list-item>Vue</ons-list-item>
+          <ons-list-item>Angular</ons-list-item>
+          <ons-list-item>React</ons-list-item>
+        </ons-list>-->
+      </div>
+    </ons-card>
+
+    <ons-card>
+      <div class="title">
+      Fat
+      </div>
+      <div class="content">
+        <canvas id="myChart"></canvas>
+
+
+        <div>
+          <ons-button class="button_width">Show</ons-button>
+
+        </div>
+    <!--    <ons-list>
+          <ons-list-header>Bindings</ons-list-header>
+          <ons-list-item>Vue</ons-list-item>
+          <ons-list-item>Angular</ons-list-item>
+          <ons-list-item>React</ons-list-item>
+        </ons-list>-->
+      </div>
+    </ons-card>
+
+    <ons-card>
+      <div class="title">
+      Carbohydrates
+      </div>
+      <div class="content">
+        <canvas id="myChart"></canvas>
+
+
+        <div>
+          <ons-button class="button_width">Show</ons-button>
+
+        </div>
+    <!--    <ons-list>
+          <ons-list-header>Bindings</ons-list-header>
+          <ons-list-item>Vue</ons-list-item>
+          <ons-list-item>Angular</ons-list-item>
+          <ons-list-item>React</ons-list-item>
+        </ons-list>-->
+      </div>
+    </ons-card>
+
+    <ons-card>
+      <div class="title">
+      Proteins
+      </div>
+      <div class="content">
+        <canvas id="myChart"></canvas>
+
+
+        <div>
+          <ons-button class="button_width">Show</ons-button>
+
+        </div>
+    <!--    <ons-list>
+          <ons-list-header>Bindings</ons-list-header>
+          <ons-list-item>Vue</ons-list-item>
+          <ons-list-item>Angular</ons-list-item>
+          <ons-list-item>React</ons-list-item>
+        </ons-list>-->
+      </div>
+    </ons-card>
+
+
   </ons-page>
 </template>
 
@@ -58,15 +191,11 @@ img.image_pic {
       <div class="center">
         Settings
       </div>
-
     </ons-toolbar>
-    <p style="text-align: center; opacity: 0.6; padding-top: 20px;">
-      Swipe right to open the menusadsa
-    </p>
   </ons-page>
 </template>
 
-<template id="food.html">
+<template id="about.html">
   <ons-page>
     <ons-toolbar>
       <div class="left">
@@ -75,133 +204,25 @@ img.image_pic {
         </ons-toolbar-button>
       </div>
       <div class="center">
-        Settings
+        About
       </div>
     </ons-toolbar>
-            <ons-list-header>Personal info</ons-list-header>
-             <ons-list-item>
-               <div class="left">
-                 <img class="list-item__thumbnail" src="https://placekitten.com/g/40/40">
-               </div>
-               <div class="center">
-                 <span class="list-item__title">Your height</span><span class="list-item__subtitle">In meters</span>
-               </div>
-             </ons-list-item>
-             <ons-list-item>
-               <div class="left">
-                 <img class="list-item__thumbnail" src="https://placekitten.com/g/40/40">
-               </div>
-               <div class="center">
-                 <span class="list-item__title">Your age</span><span class="list-item__subtitle">In years</span>
-               </div>
-             </ons-list-item>
-             <ons-list-item>
-               <div class="left">
-                 <img class="list-item__thumbnail" src="https://placekitten.com/g/40/40">
-               </div>
-               <div class="center">
-                 <span class="list-item__title">Your kilograms</span><span class="list-item__subtitle"></span>
-               </div>
-             </ons-list-item>
-             <ons-list-item>
-               <div class="left">
-                 <img class="list-item__thumbnail" src="https://placekitten.com/g/40/40">
-               </div>
-               <div class="center">
-                 <span class="list-item__title">Your favourite food</span><span class="list-item__subtitle">like swwet sarata amara</span>
-               </div>
-             </ons-list-item>
-
-
-             <ons-list-item>
-               <div class="left">
-                 <img class="list-item__thumbnail" src="https://placekitten.com/g/40/40">
-               </div>
-               <div class="center">
-                 <span class="list-item__title">Your disease</span><span class="list-item__subtitle">just names of them(select from a tab like stackoverflow)</span>
-               </div>
-             </ons-list-item>
-             <ons-list-item>
-               <div class="left">
-                 <img class="list-item__thumbnail" src="https://placekitten.com/g/40/40">
-               </div>
-               <div class="center">
-                 <span class="list-item__title">Your kilograms</span><span class="list-item__subtitle"></span>
-               </div>
-             </ons-list-item>
-
-
-
-             <ons-list-item>
-               <div class="left">
-                 <img class="list-item__thumbnail" src="https://placekitten.com/g/40/40">
-               </div>
-               <div class="center">
-                 <span class="list-item__title">Your favourite food</span><span class="list-item__subtitle"></span>
-               </div>
-             </ons-list-item>
-             <ons-list-item>
-               <div class="left">
-                 <img class="list-item__thumbnail" src="https://placekitten.com/g/40/40">
-               </div>
-               <div class="center">
-                 <span class="list-item__title">Your age</span><span class="list-item__subtitle">In years</span>
-               </div>
-             </ons-list-item>
-             <ons-list-item>
-               <div class="left">
-                 <img class="list-item__thumbnail" src="https://placekitten.com/g/40/40">
-               </div>
-               <div class="center">
-                 <span class="list-item__title">Your kilograms</span><span class="list-item__subtitle"></span>
-               </div>
-             </ons-list-item>
-
-
-
-             <ons-list-item>
-               <div class="left">
-                 <img class="list-item__thumbnail" src="https://placekitten.com/g/40/40">
-               </div>
-               <div class="center">
-                 <span class="list-item__title">Your height</span><span class="list-item__subtitle">In meters</span>
-               </div>
-             </ons-list-item>
-             <ons-list-item>
-               <div class="left">
-                 <img class="list-item__thumbnail" src="https://placekitten.com/g/40/40">
-               </div>
-               <div class="center">
-                 <span class="list-item__title">Your age</span><span class="list-item__subtitle">In years</span>
-               </div>
-             </ons-list-item>
-             <ons-list-item>
-               <div class="left">
-                 <img class="list-item__thumbnail" src="https://placekitten.com/g/40/40">
-               </div>
-               <div class="center">
-                 <span class="list-item__title">Your kilograms</span><span class="list-item__subtitle"></span>
-               </div>
-             </ons-list-item>
-
-
   </ons-page>
 </template>
-
 
 
   <script type="text/javascript">
     window.fn = {};
 
-window.fn.open = function() {
-  var menu = document.getElementById('menu');
-  menu.open();
-};
+  window.fn.open = function() {
+    var menu = document.getElementById('menu');
+    menu.open();
+  };
 
-window.fn.load = function(page) {
-  var content = document.getElementById('content');
-  var menu = document.getElementById('menu');
-  content.load(page)
-    .then(menu.close.bind(menu));
-};
+  window.fn.load = function(page) {
+    var content = document.getElementById('content');
+    var menu = document.getElementById('menu');
+    content.load(page)
+      .then(menu.close.bind(menu));
+  };
   </script>
