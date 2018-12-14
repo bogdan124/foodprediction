@@ -14,6 +14,10 @@
   .button_width{
     width:100%;
   }
+  v-ons-list.show_list_foods {
+    position: absolute;
+    top: 34px;
+}
 </style>
 <ons-splitter>
   <ons-splitter-side id="menu" side="left" width="220px" collapse swipeable>
@@ -26,7 +30,7 @@
         <ons-list-item onclick="fn.load('FoodEated.html')" tappable>
           FoodEated
         </ons-list-item>
-        <ons-list-item onclick="fn.load('FoodShop.html')" tappable>
+        <ons-list-item onclick="fn.load('foodshop.html')" tappable>
           FoodShop
         </ons-list-item>
         <ons-list-item onclick="fn.load('settings.html')" tappable>
@@ -218,7 +222,7 @@
 </template>
 
 
-<template id="FoodShop.html">
+<template id="foodshop.html">
   <ons-page>
     <ons-toolbar>
       <div class="left">
@@ -231,26 +235,47 @@
       </div>
 
 
+
     </ons-toolbar>
-    <ons-list-header>Thumbnails and titles</ons-list-header>
+    <ons-list-header style="position:fixed;z-index:100;width:100%">Category of products</ons-list-header>
     <!--after that food per magazine-->
-        <ons-list-item>
-          <div class="left">
-            <img class="list-item__thumbnail" src="https://placekitten.com/g/40/40">
-          </div>
-          <div class="center">
-            <span class="list-item__title">sweet acreu</span><span class="list-item__subtitle">On the Internet</span>
-          </div>
-        </ons-list-item>
-        <ons-list-item>
-          <div class="left">
-            <img class="list-item__thumbnail" src="https://placekitten.com/g/40/40">
-          </div>
-          <div class="center">
-            <span class="list-item__title">Cutest kitty</span><span class="list-item__subtitle">On the Internet</span>
-          </div>
-        </ons-list-item>
+     <v-ons-list class="show_list_foods">
+
+       </v-ons-list>
+      <script>
+show_data();
+
+        function show_data(){
+          var json_data=[
+          [1,"Produse lactate si analogi"],
+          [2,"Grasimi si uleiuri si emulsii de grasimi si uleiuri"],
+          [3,"Inghetata"],
+          [4,"Fructe si legume"],
+          [5,"Produse de cofetarie"],
+          [6,"Cereale si produse pe baza de cereale"],
+          [7,"Produse de panificatie"],
+          [8,"Carne"],
+          [9,"Peste si produse de pescarie"],
+          [10,"Oua si produse din oua"],
+          [11,"Saruri, condimente, supe, sosuri, salate si produse proteice"],
+          [12,"Zaharuri, siropuri, miere si indulcitori de masa"],
+          [13,"Bauturi"],
+          [14,"Zaharuri, siropuri, miere si indulcitori de masa"]];
+          for( i=0;i<=json_data.length;i++){
+            console.log(json_data[i]);
+            $(".show_list_foods").append("<ons-list-item onclick=fn.load('/page?id="+json_data[i][0]+"') tappable><div class='left'><img class='list-item__thumbnail' src='https://placekitten.com/g/40/40'>  </div>  <div class='center'>  <span class='list-item__title'>"+json_data[i][1]+"</span><span class='list-item__subtitle'>On the Internet</span></div></ons-list-item>");
+
+          }
+
+        }
+
+
+
+        </script>
+
   </ons-page>
+
+
 </template>
 
 <template id="FoodEated.html">
@@ -268,7 +293,10 @@
   </ons-page>
 </template>
 
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
   <script type="text/javascript">
+call_onsen();
+  function call_onsen(){
     window.fn = {};
 
   window.fn.open = function() {
@@ -281,5 +309,8 @@
     var menu = document.getElementById('menu');
     content.load(page)
       .then(menu.close.bind(menu));
+
   };
+
+  }
   </script>
