@@ -23,6 +23,12 @@
         <ons-list-item onclick="fn.load('home.html')" tappable>
           Home
         </ons-list-item>
+        <ons-list-item onclick="fn.load('FoodEated.html')" tappable>
+          FoodEated
+        </ons-list-item>
+        <ons-list-item onclick="fn.load('FoodShop.html')" tappable>
+          FoodShop
+        </ons-list-item>
         <ons-list-item onclick="fn.load('settings.html')" tappable>
           Settings
         </ons-list-item>
@@ -180,6 +186,7 @@
   </ons-page>
 </template>
 
+
 <template id="settings.html">
   <ons-page>
     <ons-toolbar>
@@ -210,6 +217,56 @@
   </ons-page>
 </template>
 
+
+<template id="FoodShop.html">
+  <ons-page>
+    <ons-toolbar>
+      <div class="left">
+        <ons-toolbar-button onclick="fn.open()">
+          <ons-icon icon="md-menu"></ons-icon>
+        </ons-toolbar-button>
+      </div>
+      <div class="center">
+        FoodShop
+      </div>
+
+
+    </ons-toolbar>
+    <ons-list-header>Thumbnails and titles</ons-list-header>
+    <!--after that food per magazine-->
+        <ons-list-item>
+          <div class="left">
+            <img class="list-item__thumbnail" src="https://placekitten.com/g/40/40">
+          </div>
+          <div class="center">
+            <span class="list-item__title">sweet acreu</span><span class="list-item__subtitle">On the Internet</span>
+          </div>
+        </ons-list-item>
+        <ons-list-item>
+          <div class="left">
+            <img class="list-item__thumbnail" src="https://placekitten.com/g/40/40">
+          </div>
+          <div class="center">
+            <span class="list-item__title">Cutest kitty</span><span class="list-item__subtitle">On the Internet</span>
+          </div>
+        </ons-list-item>
+  </ons-page>
+</template>
+
+<template id="FoodEated.html">
+  <ons-page>
+    <ons-toolbar>
+      <div class="left">
+        <ons-toolbar-button onclick="fn.open()">
+          <ons-icon icon="md-menu"></ons-icon>
+        </ons-toolbar-button>
+      </div>
+      <div class="center">
+        FoodEated
+      </div>
+    </ons-toolbar>
+  </ons-page>
+</template>
 
   <script type="text/javascript">
     window.fn = {};
