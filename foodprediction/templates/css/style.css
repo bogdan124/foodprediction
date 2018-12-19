@@ -1,3 +1,14 @@
-input.search-input.search-input--material {
-    width: 159%;
+ons-search-input {
+    width: 100%;
+}
+.profile_image {
+    width: 6em;
+    height: 6em;
+}
+.button_width{
+  width:100%;
+}
+v-ons-list.show_list_foods {
+  position: absolute;
+  top: 34px;
 }

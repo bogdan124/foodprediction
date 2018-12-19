@@ -1,5 +1,6 @@
 
 
+
 var json_data=[
 [1,"Produse lactate si analogi"],
 [2,"Grasimi si uleiuri si emulsii de grasimi si uleiuri"],
@@ -82,6 +83,8 @@ call_onsen();
 
 
   function food_shop_page(id_page,name_page){
-
+      for (var i = 0; i < json_data.length; i++) {
+        json_data[i];
+      }
 
   }
