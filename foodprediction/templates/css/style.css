@@ -12,3 +12,33 @@ v-ons-list.show_list_foods {
   position: absolute;
   top: 34px;
 }
+.content.card__content.card--material__content {
+    color: black;
+    font-weight: 600;
+}
+.search_from_food_array{
+  position:fixed;
+}
+.color_red{
+  background-color:black;
+}
+.color_yellow{
+  background-color:yellow;
+}
+.color_green{
+  background-color:green;
+}
+.main_color_div {
+  width: 12px;
+  height: 12px;
+  border-radius: 100%;
+  position: absolute;
+  float: right;
+  right: 12px;
+}
+.button_class_add {
+  position: absolute;
+  float: right;
+  margin-right: 1px;
+  right: 11px;
+}

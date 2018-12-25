@@ -1,20 +1,56 @@
 
-
-
+<!--Here's your equation: MET value multiplied by weight in kilograms tells you calories burned per hour (MET*weight in kg=calories/hour).
+ If you only want to know how many calories you burned in a half hour, divide that number by two. If you want to know about 15 minutes, divide that number by four.
+ Second, look up your activity on the Compendium. There's a dropdown menu on the site labeled "Activity Categories." Under that menu, you'll see a long list of categories,
+ starting with bicycling and finishing with volunteer activities. If you open up a category, you can see the activities that fall under it.
+If you open up sports (category 15) you can then select an activity. There are many listings for some activities —
+there's a difference between boxing in a ring and boxing by hitting a punching bag, for example. Look for the MET value from the 2011 Compendium, as it's
+https://www.businessinsider.com/how-to-calculate-calories-burned-exercise-met-value-2017-8
+-->
 <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
 <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
 <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 <link rel="stylesheet" type="text/css" href="css/style.css">
-<style >
-
-</style>
+<style>
+  .content.card__content.card--material__content {
+      color: black;
+      font-weight: 600;
+  }
+  .search_from_food_array{
+    position:fixed;
+  }
+  .color_red{
+    background-color:black;
+  }
+  .color_yellow{
+    background-color:yellow;
+  }
+  .color_green{
+    background-color:green;
+  }
+  .main_color_div {
+    width: 12px;
+    height: 12px;
+    border-radius: 100%;
+    position: absolute;
+    float: right;
+    right: 12px;
+}
+.button_class_add {
+    position: absolute;
+    float: right;
+    margin-right: 1px;
+    right: 11px;
+}
+  </style>
 <ons-splitter>
   <ons-splitter-side id="menu" side="left" width="220px" collapse swipeable>
     <ons-page>
       <img src="" class="profile_image"/>
       <ons-list>
         <ons-list-item onclick="fn.load('home.html')" tappable>
+        <ons-icon icon="md-home"></ons-icon>
           Home
         </ons-list-item>
         <ons-list-item onclick="fn.load('FoodEated.html')" tappable>
@@ -23,12 +59,16 @@
         <ons-list-item onclick="fn.load('foodshop.html')" tappable>
           FoodShop
         </ons-list-item>
+        <ons-list-item onclick="fn.load('sports.html')" tappable>
+          Sports
+        </ons-list-item>
         <ons-list-item onclick="fn.load('settings.html')" tappable>
           Settings
         </ons-list-item>
         <ons-list-item onclick="fn.load('about.html')" tappable>
           About
         </ons-list-item>
+
       </ons-list>
     </ons-page>
   </ons-splitter-side>
@@ -46,39 +86,24 @@
       <div class="center">
         Main
       </div>
+      <div class="right">
+        <ons-toolbar-button onclick="fn.load('camera.html')">
+          <ons-icon icon="md-camera"></ons-icon>
+        </ons-toolbar-button>
+      </div>
     </ons-toolbar>
 
 
 
     <ons-card>
       <div class="title">
-      Nutrients
+      Calories
       </div>
       <div class="content">
         <canvas id="myChart"></canvas>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
-        <script>
-          var ctx = document.getElementById('myChart').getContext('2d');
-          var chart = new Chart(ctx, {
-              // The type of chart we want to create
-              type: 'bar',
-
-              // The data for our dataset
-              data: {
-                  labels: ["carbohydrates", "proteins", "fats"],
-                  datasets: [{
-                      label: "Nutrients",
-                      backgroundColor: 'rgb(255, 99, 132)',
-                      borderColor: 'rgb(255, 99, 132)',
-                      data: [3, 10, 5],
-                  }]
-              },
-
-              // Configuration options go here
-              options: {}
-          });
-        </script>
+        <script src="js/graph_main_page.js"></script>
         <div>
           <ons-button class="button_width">Show</ons-button>
 
@@ -179,10 +204,111 @@
 
   </ons-page>
 </template>
+<template id="camera.html">
+  <ons-page>
+    <ons-toolbar>
+      <div class="left">
+        <ons-toolbar-button onclick="fn.open()">
+          <ons-icon icon="md-menu"></ons-icon>
+        </ons-toolbar-button>
+      </div>
+      <div class="center">
+        Camera
+      </div>
+      <div class="right">
+        <ons-toolbar-button onclick="fn.load('camera.html')">
+          <ons-icon icon="md-camera"></ons-icon>
+        </ons-toolbar-button>
+      </div>
+    </ons-toolbar>
+    <style>
 
+      .select{
+        display:none;
+      }
+
+        #videoContainer {
+            box-sizing: border-box;
+            height: 100%;
+            overflow: hidden;
+            width: 100%;
+         }
+         video {
+      /*     width: 100%;
+         opacity:.65;
+         min-height:100vh;
+         margin:0 auto;
+         position:fixed;
+         background: transparent;
+         border-radius: 5px;*/
+         }
+
+    </style>
+    <div id="container">
+
+      <div class="select">
+        <label for="audioSource">Audio source: </label><select id="audioSource"></select>
+      </div>
+
+      <div class="select">
+        <label for="videoSource">Video source: </label><select id="videoSource"></select>
+      </div>
+
+
+      <!--<div id="videoContainer">  <video class="style_the_camera"  width="640" height="480" muted autoplay></video></div>-->
+      <video id="video" width="640" height="480" muted autoplay></video>
+      <button id="snap">Snap Photo</button>
+      <canvas id="canvas" width="640" height="480"></canvas>
+
+
+
+      <script src="js/camera.js"></script>
+
+
+    </div>
+
+
+  </ons-page>
+</template>
+
+<template id="sports.html">
+  <ons-page>
+    <ons-toolbar>
+      <div class="left">
+        <ons-toolbar-button onclick="fn.open()">
+          <ons-icon icon="md-menu"></ons-icon>
+        </ons-toolbar-button>
+      </div>
+      <div class="center">
+        Sports
+      </div>
+      <div class="right">
+        <ons-toolbar-button onclick="fn.load('camera.html')">
+          <ons-icon icon="md-camera"></ons-icon>
+        </ons-toolbar-button>
+      </div>
+    </ons-toolbar>
+
+    <ons-list class="your_sports">
+   <ons-list-header>Your Sports</ons-list-header>
+
+   </ons-list>
+
+   <ons-list class="our_sports">
+   <ons-list-header>Our sports</ons-list-header>
+
+   </ons-list>
+   <script src="js/sports.js"></script>
+  </ons-page>
+</template>
 
 <template id="settings.html">
   <ons-page>
+    <style>
+      .menu_settings{
+        color:black !important;
+      }
+      </style>
     <ons-toolbar>
       <div class="left">
         <ons-toolbar-button onclick="fn.open()">
@@ -192,7 +318,35 @@
       <div class="center">
         Settings
       </div>
+      <div class="right">
+        <ons-toolbar-button onclick="fn.load('camera.html')">
+          <ons-icon icon="md-camera"></ons-icon>
+        </ons-toolbar-button>
+      </div>
     </ons-toolbar>
+     <ons-list>
+    <ons-list-header class="menu_settings"><b>Profile</b></ons-list-header>
+   <ons-list-item modifier="chevron" onclick="enter_on_page(1,1)" tappable>Photo</ons-list-item>
+   <ons-list-item modifier="chevron" onclick="enter_on_page(2,1)" tappable>Username</ons-list-item>
+   <ons-list-item modifier="chevron" onclick="enter_on_page(3,1)" tappable>Password</ons-list-item>
+   <ons-list-item modifier="chevron" onclick="enter_on_page(4,1)" tappable>Years</ons-list-item>
+   <ons-list-item modifier="chevron" onclick="enter_on_page(5,1)" tappable>Height</ons-list-item>
+ </ons-list>
+ <ons-list>
+<ons-list-header class="menu_settings"><b>Platform</b></ons-list-header>
+<ons-list-item modifier="chevron" onclick="enter_on_page(6,2)" tappable>Design</ons-list-item>
+<ons-list-item modifier="chevron" onclick="enter_on_page(7,2)" tappable>Your data</ons-list-item>
+
+</ons-list>
+<ons-list>
+<ons-list-header class="menu_settings"><b>Account</b></ons-list-header>
+<ons-list-item modifier="chevron" onclick="enter_on_page(8,3)" tappable>Logout</ons-list-item>
+<ons-list-item modifier="chevron" onclick="enter_on_page(9,3)" tappable>Deactivate account</ons-list-item>
+<ons-list-item modifier="chevron" onclick="enter_on_page(10,3)" tappable>About</ons-list-item>
+</ons-list>
+<script src="js/settings_script.js"></script>
+
+
   </ons-page>
 </template>
 
@@ -207,6 +361,11 @@
       <div class="center">
         About
       </div>
+      <div class="right">
+        <ons-toolbar-button onclick="fn.load('camera.html')">
+          <ons-icon icon="md-camera"></ons-icon>
+        </ons-toolbar-button>
+      </div>
     </ons-toolbar>
   </ons-page>
 </template>
@@ -215,17 +374,34 @@
   <ons-page>
     <ons-toolbar>
       <div class="left">
-        <ons-toolbar-button onclick="fn.open()">
-          <ons-icon icon="md-menu"></ons-icon>
+        <ons-toolbar-button onclick="fn.load('foodshop.html')">
+
+        <!--  <ons-icon icon="md-menu"></ons-icon>-->
+  <ons-back-button></ons-back-button>
         </ons-toolbar-button>
+
+
+
+
       </div>
       <div class="center">
         Page
       </div>
+
       <script>
         </script>
     </ons-toolbar>
+
+
     <ons-search-input placeholder="Search something"></ons-search-input>
+
+
+       <ons-list class="content_to_show_foods">
+        <!--<ons-list-header>Long divider</ons-list-header>-->
+
+       </ons-list>
+
+
   </ons-page>
 </template>
 
@@ -241,7 +417,11 @@
         FoodShop
       </div>
 
-
+      <div class="right">
+        <ons-toolbar-button onclick="fn.load('camera.html')">
+          <ons-icon icon="md-camera"></ons-icon>
+        </ons-toolbar-button>
+      </div>
 
     </ons-toolbar>
     <ons-list-header style="position:fixed;z-index:100;width:100%">Category of products</ons-list-header>
@@ -251,6 +431,7 @@
        </v-ons-list>
       <script>
           show_data();
+
         </script>
 
   </ons-page>
@@ -269,10 +450,78 @@
       <div class="center">
         FoodEated
       </div>
+      <div class="right">
+        <ons-toolbar-button onclick="fn.load('camera.html')">
+          <ons-icon icon="md-camera"></ons-icon>
+        </ons-toolbar-button>
+      </div>
     </ons-toolbar>
+    <ons-search-input id="search_from_food_array" onkeydown="search()" placeholder="Search"></ons-search-input>
 
+    <ons-list class="append_search_results">
+    </ons-list>
+
+    <ons-list class="food_you_eat">
+    </ons-list>
+
+    <script src="js/foodeated.js"></script>
   </ons-page>
 </template>
 
+
+<ons-modal direction="up">
+  <div style="text-align: center">
+    <ons-card>
+
+
+        <div class="content">
+          <div id="tit_modal">
+
+          </div>
+          <hr/>
+          <div class="primary_content">
+
+            </div>
+        </div>
+        <ons-button id="close_modal">Close</ons-button>
+      </ons-card>
+  </div>
+</ons-modal>
+
+
+     <script>
+
+
+      /*  let app = {
+             init: function(){
+                 document.getElementById('btn').addEventListener('click', app.takephoto);
+             },
+             takephoto: function(){
+                 let opts = {
+                     quality: 80,
+                     destinationType: Camera.DestinationType.FILE_URI,
+                     sourceType: Camera.PictureSourceType.CAMERA,
+                     mediaType: Camera.MediaType.PICTURE,
+                     encodingType: Camera.EncodingType.JPEG,
+                     cameraDirection: Camera.Direction.BACK,
+                     targetWidth: 300,
+                     targetHeight: 400
+                 };
+
+                 navigator.camera.getPicture(app.ftw, app.wtf, opts);
+             },
+             ftw: function(imgURI){
+                 document.getElementById('msg').textContent = imgURI;
+                 document.getElementById('photo').src = imgURI;
+
+             },
+             wtf: function(msg){
+                 document.getElementById('msg').textContent = msg;
+             }
+         };
+
+         document.addEventListener('deviceready', app.init);
+         */
+     </script>
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 <script src="js/main.js"></script>
